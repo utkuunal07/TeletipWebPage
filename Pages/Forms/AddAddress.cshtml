@@ -1,0 +1,219 @@
+﻿@page
+@model TeletıpWeb.Pages.Forms.AddAddressModel
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .myButton {
+            box-shadow: inset 0px 1px 0px 0px #caefab;
+            background: linear-gradient(to bottom, #77d42a 5%, #5cb811 100%);
+            background-color: #77d42a;
+            border-radius: 42px;
+            border: 1px solid #268a16;
+            display: inline-block;
+            cursor: pointer;
+            color: #306108;
+            font-family: Arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 9px 38px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #aade7c;
+        }
+
+            .myButton:hover {
+                background: linear-gradient(to bottom, #5cb811 5%, #77d42a 100%);
+                background-color: #5cb811;
+            }
+
+            .myButton:active {
+                position: relative;
+                top: 1px;
+            }
+
+        .ara {
+            box-shadow: inset 0px 1px 0px 0px #caefab;
+            background: linear-gradient(to bottom, #77d42a 5%, #5cb811 100%);
+            background-color: #77d42a;
+            border-radius: 42px;
+            border: 1px solid #268a16;
+            display: inline-block;
+            cursor: pointer;
+            color: #306108;
+            font-family: Arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 9px 67px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #aade7c;
+        }
+
+            .ara:hover {
+                background: linear-gradient(to bottom, #5cb811 5%, #77d42a 100%);
+                background-color: #5cb811;
+            }
+
+            .ara:active {
+                position: relative;
+                top: 1px;
+            }
+
+        
+
+        /* Blue */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <form class="form-horizontal" method="post" >
+
+                    <select name="Hastaneno">
+                        <option value=0>Adana Özel Acıbadem Hastanesi</option>
+                        <option value=1>Ankara Acıbadem Hastanesi</option>
+                        <option value=2>Aydın Bodrum Klinik International</option>
+                        <option value=3>Bursa Özel Acıbadem Hastanesi</option>
+                        <option value=4>Eskişehir Özel Acıbadem Hastanesi</option>
+                        <option value=5>Istanbul Acıbadem Ataşehir Cerrahi Tıp Merkezi</option>
+                        <option value=6>Istanbul Acıbadem Bağdat Cerrahi Tıp Merkezi</option>
+                        <option value=7>Istanbul Acıbadem Bahçeşehir Tıp Merkezi</option>
+                        <option value=8>Istanbul Acıbadem Beylikdüzü Cerrahi Tıp Mrk.</option>
+                        <option value=9>Istanbul Acıbadem Etiler Tıp Merkezi</option>
+                        <option value=10>Istanbul Acıbadem Göktürk Tıp Merkezi</option>
+                        <option value=11>Istanbul Acıbadem Hastanesi Fulya</option>
+                        <option value=12>Istanbul Acıbadem Hastanesi Kozyatağı</option>
+                        <option value=13>Istanbul Acıbadem Hastanesi Taksim</option>
+                        <option value=14>Istanbul Acıbadem Zekeriyaköy Tıp Merkezi</option>
+                        <option value=15>Istanbul Altunizade Özel Acıbadem Hastanesi</option>
+                        <option value=16>Istanbul Bakırköy Özel Acıbadem Hastanesi</option>
+                        <option value=17>Istanbul International Özel Acıbadem Hastanesi</option>
+                        <option value=18>Istanbul Kadıköy Özel Acıbadem Hastanesi</option>
+                        <option value=19>Istanbul Maslak Özel Acıbadem Hastanesi</option>
+                        <option value=20>Özel Acıbadem Atakent Hastanesi</option>
+                        <option value=21>Kayseri Özel Acıbadem Hastanesi</option>
+                        <option value=22>Kocaeli Özel Acıbadem Hastanesi</option>
+                        <option value=23>Muğla Bodrum Özel Acıbadem Hastanesi</option>
+
+                    </select>
+                    <br><br>
+                    <!--onsubmit="return checkform(this)"-->
+                    <textarea type="text" id="textsend" asp-for="AccNo" placeholder="Accesion Numaraları" rows="20" onsubmit="return checkform(this)" required >
+
+                    </textarea>
+                    <span asp-validation-for="AccNo" class="text-danger"></span>
+                    <input type="submit" asp-page-handler="Arat" onclick="getElementById('demo').innerHTML = '@Model.Message';" id="button" class="btn ara" value="Ara"  />
+
+                    <p id="demo"></p>
+
+                    <input asp-for="@Model.Sıfır" type="submit" id="buttonexcel" value="Excel'e Yaz" class="btn myButton" disabled="@(Model.Disbale2 ? "disabled" : null)">
+                </form>
+
+                <form asp-action="Post">
+                    <input type="submit" asp-page-handler="Approve" class="btn btn-success" value="Approve" disabled="@(Model.Disbale1 ? "disabled" : null)" />
+                    <input type="submit" asp-page-handler="Decline" class="btn btn-danger" value="Decline" disabled="@(Model.Disbale2 ? "disabled" : null)" />
+                </form>
+
+            </div>
+            <div class="col-10">
+                <br><br>
+                <table>
+                    <tr>
+                        <th>Accession Numarası</th>
+                        <th>Hata</th>
+                        <th>Soyad-Ad</th>
+                        <th>TC Kimlik No</th>
+                        <th>Sut Kodu</th>
+                        <th>İstem Yöntemi</th>
+                    </tr>
+                    @foreach (var i in Model.Test)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => i.AccessionNumarası)</td>
+                            <td>@Html.DisplayFor(modelItem => i.Hata)</td>
+                            <td>@Html.DisplayFor(modelItem => i.SoyadAd)</td>
+                            <td>@Html.DisplayFor(modelItem => i.TCNo)</td>
+                            <td>@Html.DisplayFor(modelItem => i.Sutkodu)</td>
+                            <td>@Html.DisplayFor(modelItem => i.İstemYöntemi)</td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+   
+
+
+    <script>
+        function checkform(form) {
+            // get all the inputs within the submitted form
+            var inputs = form.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) {
+                // only validate the inputs that have the required attribute
+                if (inputs[i].hasAttribute("required")) {
+                    if (inputs[i].value == "") {
+                        // found an empty field that is required
+                        alert("Please fill all required fields");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    </script>
+
+    <script>
+        function enableButton2() {
+            document.getElementById("buttonexcel").disabled = false;
+        }
+    </script>
+
+
+    <script>
+        function hidebuton() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--
+<div class="text-xl-left">
+    <h1 class="display-4">Welcome to </h1>asp-for="Address.City"
+</div>
+    -->

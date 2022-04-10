@@ -1,0 +1,27 @@
+﻿@page "{handler?}"
+@model MyWebApplication.Pages.DisabledButtonModel
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<br>
+<textarea rows="4" cols="30" id="texta">213</textarea>
+<br>
+<input type="submit" value="next" />
+
+<script>
+    $(document).ready(function () {
+        $('input[value="next"]').attr('disabled', true);
+
+        $('input[type="text"],textarea').on('keyup', function () {
+            var textarea_value = $("#texta").val();
+            
+
+            if (textarea_value != '') {
+                $('input[value="next"]').attr('disabled', false);
+            } else {
+                $('input[value="next"]').attr('disabled', true);
+            }
+        });
+    });
+</script>
